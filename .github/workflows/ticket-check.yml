@@ -2,7 +2,7 @@ name: Ticket Quantity Hourly Report
 
 on:
   schedule:
-    - cron: '*/15 * * * *'   # Every 15 minutes (UTC)
+    - cron: '36 * * * *'   # Every 15 minutes (UTC)
   workflow_dispatch:         # Allows manual trigger from GitHub UI
 
 jobs:
@@ -40,7 +40,7 @@ jobs:
           token: ${{ secrets.TELEGRAM_TOKEN }}
           format: markdown
           message: |
-            🕒 *庫存報告* (${{ github.event.schedule || '手動觸發' }} UTC)
+            🕒 *庫存報告* 
 
             第三場 (15:40–16:40) 剩餘：**${{ steps.check_qty.outputs.qty }}** 張
 

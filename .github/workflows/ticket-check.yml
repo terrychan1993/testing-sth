@@ -2,7 +2,7 @@ name: Ticket Quantity Hourly Report
 
 on:
   schedule:
-    - cron: '36 * * * *'   # Every 15 minutes (UTC)
+    - cron: '40 * * * *'   # Every 15 minutes (UTC)
   workflow_dispatch:         # Allows manual trigger from GitHub UI
 
 jobs:

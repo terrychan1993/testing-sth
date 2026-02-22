@@ -47,10 +47,5 @@ jobs:
 
             第三場 (15:40–16:40) 剩餘數量：**${{ steps.check_qty.outputs.qty }}** 張
 
-      - name: Log output (for debugging in GitHub Actions logs)
-        run: |
-        echo "Quantity detected: ${{ steps.check_qty.outputs.qty }}"
-        cat output.txt || true
-
 
 

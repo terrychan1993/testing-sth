@@ -1,0 +1,56 @@
+name: Ticket Quantity Hourly Report
+
+on:
+  schedule:
+    - cron: '0 * * * *'          # Every hour at :00 (cleaner than */59)
+                                 # Alternatives: '*/30 * * * *' = every 30 min
+                                 #               '*/59 * * * *' = ~every hour staggered
+  workflow_dispatch:             # Still allows manual trigger from GitHub UI
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install requests beautifulsoup4
+
+      - name: Run ticket checker
+        id: check_qty
+        run: |
+          python monitor.py > output.txt 2>&1
+          # Extract the number (adjust pattern if your print format changes)
+          qty=$(grep -oP '剩餘數量：\K\d+' output.txt || echo '查詢失敗或無數據')
+          echo "qty=$qty" >> $GITHUB_OUTPUT
+          # Also capture full output for the message
+          echo "full_output<<EOF" >> $GITHUB_OUTPUT
+          cat output.txt >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+
+      - name: Send Telegram hourly report
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TELEGRAM_CHAT_ID }}
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          format: markdown
+          message: |
+            🕒 *每小時庫存報告* (${{ github.event.schedule || '手動觸發' }})
+
+            第三場 (15:40–16:40) 剩餘數量：**${{ steps.check_qty.outputs.qty }}** 張
+
+      - name: Log output (for debugging in GitHub Actions logs)
+        run: |
+        echo "Quantity detected: ${{ steps.check_qty.outputs.qty }}"
+        cat output.txt || true
+
+
+

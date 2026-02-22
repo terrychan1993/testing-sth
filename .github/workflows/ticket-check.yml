@@ -2,11 +2,9 @@ name: Ticket Quantity Hourly Report
 
 on:
   schedule:
-    - cron: '*/15 * * * *'          # Every hour at :00 (cleaner than */59)
-                                 # Alternatives: '*/30 * * * *' = every 30 min
-                                 #               '*/59 * * * *' = ~every hour staggered
-  workflow_dispatch:             # Still allows manual trigger from GitHub UI
-                                 
+    - cron: '*/15 * * * *'   # Every 15 minutes (UTC)
+  workflow_dispatch:         # Allows manual trigger from GitHub UI
+
 jobs:
   check:
     runs-on: ubuntu-latest
@@ -27,22 +25,27 @@ jobs:
       - name: Run ticket checker
         id: check_qty
         run: |
-          python monitor.py > output.txt 2>&1
-          # Extract the number (adjust pattern if your print format changes)
+          python monitor.py > output.txt 2>&1 || true
           qty=$(grep -oP '剩餘數量：\K\d+' output.txt || echo '查詢失敗或無數據')
           echo "qty=$qty" >> $GITHUB_OUTPUT
-          # Also capture full output for the message
           echo "full_output<<EOF" >> $GITHUB_OUTPUT
-          cat output.txt >> $GITHUB_OUTPUT
+          cat output.txt >> $GITHUB_OUTPUT || echo "No output captured"
           echo "EOF" >> $GITHUB_OUTPUT
 
-      - name: Send Telegram hourly report
+      - name: Send Telegram report
+        if: always()
         uses: appleboy/telegram-action@master
         with:
           to: ${{ secrets.TELEGRAM_CHAT_ID }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
           format: markdown
           message: |
-            🕒 *每小時庫存報告* (${{ github.event.schedule || '手動觸發' }})
+            🕒 *庫存報告* (${{ github.event.schedule || '手動觸發' }} UTC)
 
-            第三場 (15:40–16:40) 剩餘數量：**${{ steps.check_qty.outputs.qty }}** 張
+            第三場 (15:40–16:40) 剩餘：**${{ steps.check_qty.outputs.qty }}** 張
+
+            完整輸出：${{ steps.check_qty.outputs.full_output }}
+
+            購買連結：https://javstarmeet.com/collections/%E6%94%9D%E5%BD%B1%E6%9C%83/products/%E2%8F%B1%EF%B8%8F-%F0%9F%93%B8-%E6%A3%AE%E6%97%A5%E5%90%91%E5%AD%90-%E9%A6%99%E6%B8%AF%E7%B2%89%E7%B5%B2%E6%94%9D%E5%BD%B1%E6%9C%83-2026%E5%B9%B43%E6%9C%8824%E6%97%A5-%E5%80%8B%E4%BA%BA%E5%8A%A0%E8%B3%BC%E6%8B%8D%E6%94%9D%E5%88%B8?variant=52007361577241
+            
+            如 ≤ 5 張 → 盡快購買！

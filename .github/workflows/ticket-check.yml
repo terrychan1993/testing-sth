@@ -2,7 +2,7 @@ name: Ticket Quantity Hourly Report
 
 on:
   schedule:
-    - cron: '35 * * * *'          # Every hour at :00 (cleaner than */59)
+    - cron: '40 * * * *'          # Every hour at :00 (cleaner than */59)
                                  # Alternatives: '*/30 * * * *' = every 30 min
                                  #               '*/59 * * * *' = ~every hour staggered
   workflow_dispatch:             # Still allows manual trigger from GitHub UI

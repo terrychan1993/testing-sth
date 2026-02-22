@@ -1,7 +1,8 @@
 import requests
 from bs4 import BeautifulSoup
 import re
-import time
+import datetime
+import sys
 
 URL = "https://javstarmeet.com/collections/%E6%94%9D%E5%BD%B1%E6%9C%83/products/%E2%8F%B1%EF%B8%8F-%F0%9F%93%B8-%E6%A3%AE%E6%97%A5%E5%90%91%E5%AD%90-%E9%A6%99%E6%B8%AF%E7%B2%89%E7%B5%B2%E6%94%9D%E5%BD%B1%E6%9C%83-2026%E5%B9%B43%E6%9C%8824%E6%97%A5-%E5%80%8B%E4%BA%BA%E5%8A%A0%E8%B3%BC%E6%8B%8D%E6%94%9D%E5%88%B8?variant=52007361577241"
 
@@ -16,17 +17,20 @@ def get_remaining_qty():
         resp = requests.get(URL, headers=HEADERS, timeout=12)
         resp.raise_for_status()
     except Exception as e:
-        print(f"Request failed: {e}")
+        print(f"Request failed: {e}", file=sys.stderr)
         return None
 
     soup = BeautifulSoup(resp.text, "html.parser")
 
-    # Method 1 — most accurate in your case — data-current-qty
+    # Primary method: data-current-qty attribute (seems most reliable from your HTML)
     input_el = soup.find("input", {"data-current-qty": re.compile(r"\d+")})
     if input_el and "data-current-qty" in input_el.attrs:
-        return int(input_el["data-current-qty"])
+        try:
+            return int(input_el["data-current-qty"])
+        except (ValueError, TypeError):
+            pass
 
-    # Method 2 — fallback: the max attribute on quantity input
+    # Fallback 1: max attribute on quantity input
     qty_input = soup.find("input", {"name": "quantity", "type": "number"})
     if qty_input and "max" in qty_input.attrs:
         try:
@@ -34,24 +38,27 @@ def get_remaining_qty():
         except (ValueError, TypeError):
             pass
 
-    # Method 3 — some themes also have it in a nearby element (less common)
+    # Fallback 2: look for text like "剩餘 X" or similar (less common)
     stock_text = soup.find(string=re.compile(r"(剩餘|剩余|remaining|left|only)\s*\d+", re.I))
     if stock_text:
         m = re.search(r"\d+", stock_text)
         if m:
             return int(m.group())
 
-    print("Cannot find quantity info in HTML.")
+    print("Cannot find quantity info in HTML.", file=sys.stderr)
     return None
 
 
-# ────────────────────────────────────────
-# Usage examples
-# ────────────────────────────────────────
+if __name__ == "__main__":
+    now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     qty = get_remaining_qty()
+
     if qty is not None:
         print(f"第三場 (15:40–16:40) 剩餘數量：{qty}")
-        if qty <= 3:
+        if qty <= 5:
             print("!!! 數量很少了 !!!")
     else:
-        print("查詢失敗")
+        print("查詢失敗或頁面無剩餘數量資訊")
+
+    # Also print timestamp at the end for logs
+    print(f"檢查時間：{now}")

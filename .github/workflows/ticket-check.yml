@@ -26,16 +26,12 @@ jobs:
         id: check_qty
         run: |
           python monitor.py > output.txt 2>&1 || true
-          qty=$(grep -oP '剩餘數量：\K\d+' output.txt | head -1 || echo '查詢失敗或無數據')
-          echo "qty=$qty" >> "$GITHUB_OUTPUT"
-          if [ -s output.txt ]; then
-            full_b64=$(base64 -w 0 output.txt)
-          else
-            full_b64=$(echo "無輸出內容" | base64 -w 0)
-          fi
-          echo "full_output_b64=$full_b64" >> "$GITHUB_OUTPUT"
 
-      - name: Send Telegram report
+          # Truncate to ~3000 chars for Telegram
+          truncated=$(head -c 3000 output.txt || echo "無內容")
+          echo "full_text=$truncated" >> "$GITHUB_OUTPUT"
+          
+      - name: Send full output to Telegram
         if: always()
         uses: appleboy/telegram-action@master
         with:
@@ -43,9 +39,6 @@ jobs:
           token: ${{ secrets.TELEGRAM_TOKEN }}
           format: markdown
           message: |
-            🕒 *庫存報告* (${{ github.event.schedule || '手動觸發' }} UTC)
+            🕒 *完整輸出報告* (${{ github.event.schedule || '手動觸發' }} UTC)
 
-            最近檢查到的剩餘數量：**${{ steps.check_qty.outputs.qty }}** 張
-            （如果顯示「查詢失敗」，表示頁面未顯示數量輸入框）
-
-            完整腳本輸出（已解碼）：$(echo "${{ steps.check_qty.outputs.full_output_b64 }}" | base64 -d 2>/dev/null || echo "無法顯示完整輸出")
+            ${{ steps.check_qty.outputs.full_text || '無輸出內容' }}

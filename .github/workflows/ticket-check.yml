@@ -93,8 +93,7 @@ jobs:
             第二場：**${{ steps.check_qty.outputs.qty1B }}** 加購券：**${{ steps.check_qty.outputs.qty2B }}**
             第三場：**${{ steps.check_qty.outputs.qty1C }}** 加購券：**${{ steps.check_qty.outputs.qty2C }}**
             見面會入場券
-            第一場：**${{ steps.check_qty.outputs.qty3A }}**
-            第二場：**${{ steps.check_qty.outputs.qty3B }}**
+            第一場：**${{ steps.check_qty.outputs.qty3A }}** 第二場：**${{ steps.check_qty.outputs.qty3B }}**
             見面會合照券
             第一場：**${{ steps.check_qty.outputs.qty4A }}** 第二場：**${{ steps.check_qty.outputs.qty4B }}**
             10秒個人攝影券

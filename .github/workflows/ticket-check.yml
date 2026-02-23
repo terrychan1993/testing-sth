@@ -26,12 +26,21 @@ jobs:
         id: check_qty
         run: |
           python monitor.py > output.txt 2>&1 || true
-          qty=$(grep -oP '剩餘數量：\K\d+' output.txt || echo '查詢失敗或無數據')
-          echo "qty=$qty" >> $GITHUB_OUTPUT
-          echo "full_output<<EOF" >> $GITHUB_OUTPUT
-          cat output.txt >> $GITHUB_OUTPUT || echo "No output captured"
-          echo "EOF" >> $GITHUB_OUTPUT
 
+          # Safely extract the first found quantity number (for the main display)
+          qty=$(grep -oP '剩餘數量：\K\d+' output.txt | head -1 || echo '查詢失敗或無數據')
+
+          # Write single-line outputs
+          echo "qty=$qty" >> "$GITHUB_OUTPUT"
+
+          # Encode full output as base64 to avoid any parsing issues
+          if [ -s output.txt ]; then
+            full_b64=$(base64 -w 0 output.txt)
+          else
+            full_b64=$(echo "無輸出內容" | base64 -w 0)
+          fi
+          echo "full_output_b64=$full_b64" >> "$GITHUB_OUTPUT"
+          
       - name: Send Telegram report
         if: always()
         uses: appleboy/telegram-action@master

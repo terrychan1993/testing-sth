@@ -62,11 +62,11 @@ jobs:
           format: markdown
           message: |
             🕒 *庫存報告* (${{ steps.time.outputs.macau_time }})
-            森日向子 香港粉絲攝影會【2026年3月21日
+            森日向子 香港粉絲攝影會【2026年3月21日】
             第一場 (12:00–13:00) 剩餘：**${{ steps.check_qty.outputs.qty1 }}** 張
             第二場 (13:50–14:50) 剩餘：**${{ steps.check_qty.outputs.qty2 }}** 張
             第三場 (15:40–16:40) 剩餘：**${{ steps.check_qty.outputs.qty3 }}** 張
-            森日向子 香港粉絲攝影會【2026年3月21日】-「個人加購拍攝券」
+            「個人加購拍攝券」
             第一場 (12:00–13:00) 剩餘：**${{ steps.check_qty.outputs.qty4 }}** 張
             第二場 (13:50–14:50) 剩餘：**${{ steps.check_qty.outputs.qty5 }}** 張
             第三場 (15:40–16:40) 剩餘：**${{ steps.check_qty.outputs.qty6 }}** 張

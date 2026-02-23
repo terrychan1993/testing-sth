@@ -89,28 +89,24 @@ jobs:
           message: |
             🕒 *森日向子庫存報告* (${{ steps.time.outputs.macau_time }})
             攝影會
-            第一場 (12:00–13:00) 剩餘：**${{ steps.check_qty.outputs.qty1A }}** 張 加購券 剩餘：**${{ steps.check_qty.outputs.qty2A }}** 張
-            第二場 (13:50–14:50) 剩餘：**${{ steps.check_qty.outputs.qty1B }}** 張 加購券 剩餘：**${{ steps.check_qty.outputs.qty2B }}** 張
-            第三場 (15:40–16:40) 剩餘：**${{ steps.check_qty.outputs.qty1C }}** 張 加購券 剩餘：**${{ steps.check_qty.outputs.qty2C }}** 張
-            「個人加購拍攝券」
-            第一場 (12:00–13:00) 剩餘：**${{ steps.check_qty.outputs.qty2A }}** 張
-            第二場 (13:50–14:50) 剩餘：**${{ steps.check_qty.outputs.qty2B }}** 張
-            第三場 (15:40–16:40) 剩餘：**${{ steps.check_qty.outputs.qty2C }}** 張
+            第一場 (12:00–13:00)：**${{ steps.check_qty.outputs.qty1A }}** 加購券：**${{ steps.check_qty.outputs.qty2A }}**
+            第二場 (13:50–14:50)：**${{ steps.check_qty.outputs.qty1B }}** 加購券：**${{ steps.check_qty.outputs.qty2B }}**
+            第三場 (15:40–16:40)：**${{ steps.check_qty.outputs.qty1C }}** 加購券：**${{ steps.check_qty.outputs.qty2C }}**
             見面會入場券
-            第一場 (13:00–16:00) 剩餘：**${{ steps.check_qty.outputs.qty3A }}** 張
-            第二場 (16:50–19:50) 剩餘：**${{ steps.check_qty.outputs.qty3B }}** 張
+            第一場 (13:00–16:00)：**${{ steps.check_qty.outputs.qty3A }}**
+            第二場 (16:50–19:50)：**${{ steps.check_qty.outputs.qty3B }}**
             見面會合照券
-            第一場 剩餘：**${{ steps.check_qty.outputs.qty4A }}** 張
-            第二場 剩餘：**${{ steps.check_qty.outputs.qty4B }}** 張
+            第一場：**${{ steps.check_qty.outputs.qty4A }}**
+            第二場：**${{ steps.check_qty.outputs.qty4B }}**
             10秒個人攝影券
-            第一場 剩餘：**${{ steps.check_qty.outputs.qty5A }}** 張
-            第二場 剩餘：**${{ steps.check_qty.outputs.qty5B }}** 張
+            第一場：**${{ steps.check_qty.outputs.qty5A }}**
+            第二場：**${{ steps.check_qty.outputs.qty5B }}**
             10秒自拍券
-            第一場 剩餘：**${{ steps.check_qty.outputs.qty6A }}** 張
-            第二場 剩餘：**${{ steps.check_qty.outputs.qty6B }}** 張
+            第一場：**${{ steps.check_qty.outputs.qty6A }}**
+            第二場：**${{ steps.check_qty.outputs.qty6B }}**
             簽名券
-            第一場 剩餘：**${{ steps.check_qty.outputs.qty7A }}** 張
-            第二場 剩餘：**${{ steps.check_qty.outputs.qty7B }}** 張
-            15秒Video錄影劵剩餘：**${{ steps.check_qty.outputs.qty8 }}** 張
-            唇印簽名劵剩餘：**${{ steps.check_qty.outputs.qty9 }}** 張
-            教師挑戰劵剩餘：**${{ steps.check_qty.outputs.qty9 }}** 張
+            第一場：**${{ steps.check_qty.outputs.qty7A }}**
+            第二場：**${{ steps.check_qty.outputs.qty7B }}**
+            15秒Video錄影劵：**${{ steps.check_qty.outputs.qty8 }}**
+            唇印簽名劵：**${{ steps.check_qty.outputs.qty9 }}**
+            教師挑戰劵：**${{ steps.check_qty.outputs.qty9 }}**

@@ -161,4 +161,4 @@ jobs:
             簽名券
             第一場：**${{ steps.check_qty.outputs.qty17A }}** 第二場：**${{ steps.check_qty.outputs.qty17B }}**
             15秒Video錄影劵：**${{ steps.check_qty.outputs.qty18 }}**
-            唇印簽名劵：**${{ steps.check_qty.outputs.qty19 }}**
+            壁咚套餐：**${{ steps.check_qty.outputs.qty19 }}**

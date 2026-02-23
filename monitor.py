@@ -61,5 +61,3 @@ if __name__ == "__main__":
 
         else:
             print(f"{slot_name} 查詢失敗或已售罄/無數量顯示")
-
-        print("-" * 40)

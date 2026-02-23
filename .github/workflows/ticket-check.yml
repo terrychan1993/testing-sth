@@ -32,20 +32,46 @@ jobs:
           mapfile -t qtys < <(grep -oP '剩餘數量：\K\d+' output.txt)
 
           # If we have at least 1 number, use them; otherwise fallback
-          qty1=${qtys[0]:-查詢失敗}
-          qty2=${qtys[1]:-查詢失敗}
-          qty3=${qtys[2]:-查詢失敗}
-          qty4=${qtys[3]:-查詢失敗}
-          qty5=${qtys[4]:-查詢失敗}
-          qty6=${qtys[5]:-查詢失敗}
+          qty1A=${qtys[0]:-查詢失敗}
+          qty1B=${qtys[1]:-查詢失敗}
+          qty1C=${qtys[2]:-查詢失敗}
+          qty2A=${qtys[3]:-查詢失敗}
+          qty2B=${qtys[4]:-查詢失敗}
+          qty2C=${qtys[5]:-查詢失敗}
+          qty3A=${qtys[6]:-查詢失敗}
+          qty3B=${qtys[7]:-查詢失敗}
+          qty4A=${qtys[8]:-查詢失敗}
+          qty4B=${qtys[9]:-查詢失敗}
+          qty5A=${qtys[10]:-查詢失敗}
+          qty5B=${qtys[11]:-查詢失敗}
+          qty6A=${qtys[12]:-查詢失敗}
+          qty6B=${qtys[13]:-查詢失敗}
+          qty7A=${qtys[14]:-查詢失敗}
+          qty7B=${qtys[15]:-查詢失敗}
+          qty8=${qtys[16]:-查詢失敗}
+          qty9=${qtys[17]:-查詢失敗}
+          qty10=${qtys[18]:-查詢失敗}
 
           # Save them as separate outputs
-          echo "qty1=$qty1" >> "$GITHUB_OUTPUT"
-          echo "qty2=$qty2" >> "$GITHUB_OUTPUT"
-          echo "qty3=$qty3" >> "$GITHUB_OUTPUT"
-          echo "qty4=$qty4" >> "$GITHUB_OUTPUT"
-          echo "qty5=$qty5" >> "$GITHUB_OUTPUT"
-          echo "qty6=$qty6" >> "$GITHUB_OUTPUT"
+          echo "qty1A=$qty1A" >> "$GITHUB_OUTPUT"
+          echo "qty1B=$qty1B" >> "$GITHUB_OUTPUT"
+          echo "qty1C=$qty1C" >> "$GITHUB_OUTPUT"
+          echo "qty2A=$qty2A" >> "$GITHUB_OUTPUT"
+          echo "qty2B=$qty2B" >> "$GITHUB_OUTPUT"
+          echo "qty2C=$qty2C" >> "$GITHUB_OUTPUT"
+          echo "qty3A=$qty3A" >> "$GITHUB_OUTPUT"
+          echo "qty3B=$qty3B" >> "$GITHUB_OUTPUT"
+          echo "qty4A=$qty4A" >> "$GITHUB_OUTPUT"
+          echo "qty4B=$qty4B" >> "$GITHUB_OUTPUT"
+          echo "qty5A=$qty5A" >> "$GITHUB_OUTPUT"
+          echo "qty5B=$qty5B" >> "$GITHUB_OUTPUT"
+          echo "qty6A=$qty6A" >> "$GITHUB_OUTPUT"
+          echo "qty6B=$qty6B" >> "$GITHUB_OUTPUT"
+          echo "qty7A=$qty7A" >> "$GITHUB_OUTPUT"
+          echo "qty7B=$qty7B" >> "$GITHUB_OUTPUT"
+          echo "qty8=$qty8" >> "$GITHUB_OUTPUT"
+          echo "qty9=$qty9" >> "$GITHUB_OUTPUT"
+          echo "qty10=$qty10" >> "$GITHUB_OUTPUT"
           
       - name: Get current HK time
         id: time
@@ -61,12 +87,30 @@ jobs:
           token: ${{ secrets.TELEGRAM_TOKEN }}
           format: markdown
           message: |
-            🕒 *庫存報告* (${{ steps.time.outputs.macau_time }})
-            森日向子 香港粉絲攝影會【2026年3月21日】
-            第一場 (12:00–13:00) 剩餘：**${{ steps.check_qty.outputs.qty1 }}** 張
-            第二場 (13:50–14:50) 剩餘：**${{ steps.check_qty.outputs.qty2 }}** 張
-            第三場 (15:40–16:40) 剩餘：**${{ steps.check_qty.outputs.qty3 }}** 張
+            🕒 *森日向子庫存報告* (${{ steps.time.outputs.macau_time }})
+            攝影會
+            第一場 (12:00–13:00) 剩餘：**${{ steps.check_qty.outputs.qty1A }}** 張 加購券 剩餘：**${{ steps.check_qty.outputs.qty2A }}** 張
+            第二場 (13:50–14:50) 剩餘：**${{ steps.check_qty.outputs.qty1B }}** 張 加購券 剩餘：**${{ steps.check_qty.outputs.qty2B }}** 張
+            第三場 (15:40–16:40) 剩餘：**${{ steps.check_qty.outputs.qty1C }}** 張 加購券 剩餘：**${{ steps.check_qty.outputs.qty2C }}** 張
             「個人加購拍攝券」
-            第一場 (12:00–13:00) 剩餘：**${{ steps.check_qty.outputs.qty4 }}** 張
-            第二場 (13:50–14:50) 剩餘：**${{ steps.check_qty.outputs.qty5 }}** 張
-            第三場 (15:40–16:40) 剩餘：**${{ steps.check_qty.outputs.qty6 }}** 張
+            第一場 (12:00–13:00) 剩餘：**${{ steps.check_qty.outputs.qty2A }}** 張
+            第二場 (13:50–14:50) 剩餘：**${{ steps.check_qty.outputs.qty2B }}** 張
+            第三場 (15:40–16:40) 剩餘：**${{ steps.check_qty.outputs.qty2C }}** 張
+            見面會入場券
+            第一場 (13:00–16:00) 剩餘：**${{ steps.check_qty.outputs.qty3A }}** 張
+            第二場 (16:50–19:50) 剩餘：**${{ steps.check_qty.outputs.qty3B }}** 張
+            見面會合照券
+            第一場 剩餘：**${{ steps.check_qty.outputs.qty4A }}** 張
+            第二場 剩餘：**${{ steps.check_qty.outputs.qty4B }}** 張
+            10秒個人攝影券
+            第一場 剩餘：**${{ steps.check_qty.outputs.qty5A }}** 張
+            第二場 剩餘：**${{ steps.check_qty.outputs.qty5B }}** 張
+            10秒自拍券
+            第一場 剩餘：**${{ steps.check_qty.outputs.qty6A }}** 張
+            第二場 剩餘：**${{ steps.check_qty.outputs.qty6B }}** 張
+            簽名券
+            第一場 剩餘：**${{ steps.check_qty.outputs.qty7A }}** 張
+            第二場 剩餘：**${{ steps.check_qty.outputs.qty7B }}** 張
+            15秒Video錄影劵剩餘：**${{ steps.check_qty.outputs.qty8 }}** 張
+            唇印簽名劵剩餘：**${{ steps.check_qty.outputs.qty9 }}** 張
+            教師挑戰劵剩餘：**${{ steps.check_qty.outputs.qty9 }}** 張

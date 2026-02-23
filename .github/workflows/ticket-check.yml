@@ -52,6 +52,26 @@ jobs:
           qty9=${qtys[17]:-查詢失敗}
           qty10=${qtys[18]:-查詢失敗}
 
+          qty11A=${qtys[19]:-查詢失敗}
+          qty11B=${qtys[20]:-查詢失敗}
+          qty11C=${qtys[21]:-查詢失敗}
+          qty12A=${qtys[22]:-查詢失敗}
+          qty12B=${qtys[23]:-查詢失敗}
+          qty12C=${qtys[24]:-查詢失敗}
+          qty13A=${qtys[25]:-查詢失敗}
+          qty13B=${qtys[26]:-查詢失敗}
+          qty14A=${qtys[27]:-查詢失敗}
+          qty14B=${qtys[28]:-查詢失敗}
+          qty15A=${qtys[29]:-查詢失敗}
+          qty15B=${qtys[30]:-查詢失敗}
+          qty16A=${qtys[31]:-查詢失敗}
+          qty16B=${qtys[32]:-查詢失敗}
+          qty17A=${qtys[33]:-查詢失敗}
+          qty17B=${qtys[34]:-查詢失敗}
+          qty18=${qtys[35]:-查詢失敗}
+          qty19=${qtys[36]:-查詢失敗}
+          qty20=${qtys[37]:-查詢失敗}
+
           # Save them as separate outputs
           echo "qty1A=$qty1A" >> "$GITHUB_OUTPUT"
           echo "qty1B=$qty1B" >> "$GITHUB_OUTPUT"
@@ -72,6 +92,25 @@ jobs:
           echo "qty8=$qty8" >> "$GITHUB_OUTPUT"
           echo "qty9=$qty9" >> "$GITHUB_OUTPUT"
           echo "qty10=$qty10" >> "$GITHUB_OUTPUT"
+
+          echo "qty11A=$qty11A" >> "$GITHUB_OUTPUT"
+          echo "qty11B=$qty11B" >> "$GITHUB_OUTPUT"
+          echo "qty11C=$qty11C" >> "$GITHUB_OUTPUT"
+          echo "qty12A=$qty12A" >> "$GITHUB_OUTPUT"
+          echo "qty12B=$qty12B" >> "$GITHUB_OUTPUT"
+          echo "qty12C=$qty12C" >> "$GITHUB_OUTPUT"
+          echo "qty13A=$qty13A" >> "$GITHUB_OUTPUT"
+          echo "qty13B=$qty13B" >> "$GITHUB_OUTPUT"
+          echo "qty14A=$qty14A" >> "$GITHUB_OUTPUT"
+          echo "qty14B=$qty14B" >> "$GITHUB_OUTPUT"
+          echo "qty15A=$qty15A" >> "$GITHUB_OUTPUT"
+          echo "qty15B=$qty15B" >> "$GITHUB_OUTPUT"
+          echo "qty16A=$qty16A" >> "$GITHUB_OUTPUT"
+          echo "qty16B=$qty16B" >> "$GITHUB_OUTPUT"
+          echo "qty17A=$qty17A" >> "$GITHUB_OUTPUT"
+          echo "qty17B=$qty17B" >> "$GITHUB_OUTPUT"
+          echo "qty18=$qty18" >> "$GITHUB_OUTPUT"
+          echo "qty19=$qty19" >> "$GITHUB_OUTPUT"
           
       - name: Get current HK time
         id: time
@@ -87,7 +126,7 @@ jobs:
           token: ${{ secrets.TELEGRAM_TOKEN }}
           format: markdown
           message: |
-            🕒 *森日向子庫存報告* (${{ steps.time.outputs.macau_time }})
+            *森日向子庫存報告* (${{ steps.time.outputs.macau_time }})
             攝影會
             第一場：**${{ steps.check_qty.outputs.qty1A }}** 加購券：**${{ steps.check_qty.outputs.qty2A }}**
             第二場：**${{ steps.check_qty.outputs.qty1B }}** 加購券：**${{ steps.check_qty.outputs.qty2B }}**
@@ -105,3 +144,21 @@ jobs:
             15秒Video錄影劵：**${{ steps.check_qty.outputs.qty8 }}**
             唇印簽名劵：**${{ steps.check_qty.outputs.qty9 }}**
             教師挑戰劵：**${{ steps.check_qty.outputs.qty9 }}**
+
+            *藤森里穗庫存報告* (${{ steps.time.outputs.macau_time }})
+            攝影會
+            第一場：**${{ steps.check_qty.outputs.qty11A }}** 加購券：**${{ steps.check_qty.outputs.qty12A }}**
+            第二場：**${{ steps.check_qty.outputs.qty11B }}** 加購券：**${{ steps.check_qty.outputs.qty12B }}**
+            第三場：**${{ steps.check_qty.outputs.qty11C }}** 加購券：**${{ steps.check_qty.outputs.qty12C }}**
+            見面會入場券
+            第一場：**${{ steps.check_qty.outputs.qty13A }}** 第二場：**${{ steps.check_qty.outputs.qty13B }}**
+            見面會合照券
+            第一場：**${{ steps.check_qty.outputs.qty14A }}** 第二場：**${{ steps.check_qty.outputs.qty14B }}**
+            10秒個人攝影券
+            第一場：**${{ steps.check_qty.outputs.qty15A }}** 第二場：**${{ steps.check_qty.outputs.qty15B }}**
+            10秒自拍券
+            第一場：**${{ steps.check_qty.outputs.qty16A }}** 第二場：**${{ steps.check_qty.outputs.qty16B }}**
+            簽名券
+            第一場：**${{ steps.check_qty.outputs.qty17A }}** 第二場：**${{ steps.check_qty.outputs.qty17B }}**
+            15秒Video錄影劵：**${{ steps.check_qty.outputs.qty18 }}**
+            唇印簽名劵：**${{ steps.check_qty.outputs.qty19 }}**

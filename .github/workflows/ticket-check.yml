@@ -89,12 +89,12 @@ jobs:
           message: |
             🕒 *森日向子庫存報告* (${{ steps.time.outputs.macau_time }})
             攝影會
-            第一場 (12:00–13:00)：**${{ steps.check_qty.outputs.qty1A }}** 加購券：**${{ steps.check_qty.outputs.qty2A }}**
-            第二場 (13:50–14:50)：**${{ steps.check_qty.outputs.qty1B }}** 加購券：**${{ steps.check_qty.outputs.qty2B }}**
-            第三場 (15:40–16:40)：**${{ steps.check_qty.outputs.qty1C }}** 加購券：**${{ steps.check_qty.outputs.qty2C }}**
+            第一場：**${{ steps.check_qty.outputs.qty1A }}** 加購券：**${{ steps.check_qty.outputs.qty2A }}**
+            第二場：**${{ steps.check_qty.outputs.qty1B }}** 加購券：**${{ steps.check_qty.outputs.qty2B }}**
+            第三場：**${{ steps.check_qty.outputs.qty1C }}** 加購券：**${{ steps.check_qty.outputs.qty2C }}**
             見面會入場券
-            第一場 (13:00–16:00)：**${{ steps.check_qty.outputs.qty3A }}**
-            第二場 (16:50–19:50)：**${{ steps.check_qty.outputs.qty3B }}**
+            第一場：**${{ steps.check_qty.outputs.qty3A }}**
+            第二場：**${{ steps.check_qty.outputs.qty3B }}**
             見面會合照券
             第一場：**${{ steps.check_qty.outputs.qty4A }}** 第二場：**${{ steps.check_qty.outputs.qty4B }}**
             10秒個人攝影券

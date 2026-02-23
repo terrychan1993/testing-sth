@@ -40,13 +40,12 @@ jobs:
           echo "qty1=$qty1" >> "$GITHUB_OUTPUT"
           echo "qty2=$qty2" >> "$GITHUB_OUTPUT"
           echo "qty3=$qty3" >> "$GITHUB_OUTPUT"
-
-          # Optional: also save a combined summary
-          echo "qty_summary=$qty1 / $qty2 / $qty3" >> "$GITHUB_OUTPUT"
-
-          # Safe full output via base64 (recommended to avoid heredoc bugs)
-          full_b64=$(base64 -w 0 output.txt 2>/dev/null || echo "Tm8gb3V0cHV0")
-          echo "full_output_b64=$full_b64" >> "$GITHUB_OUTPUT"
+          
+      - name: Get current HK time
+        id: time
+        run: |
+          MACAU_TIME=$(TZ='Asia/Macau' date '+%Y-%m-%d %H:%M:%S')
+          echo "macau_time=$MACAU_TIME" >> "$GITHUB_OUTPUT"
 
       - name: Send Telegram report
         if: always()
@@ -56,12 +55,8 @@ jobs:
           token: ${{ secrets.TELEGRAM_TOKEN }}
           format: markdown
           message: |
-            🕒 *庫存報告* (${{ github.event.schedule || '手動觸發' }} UTC)
+            🕒 *庫存報告* (${{ steps.time.outputs.macau_time }} 澳門時間)
 
             第一場 (12:00–13:00) 剩餘：**${{ steps.check_qty.outputs.qty1 }}** 張
             第二場 (13:50–14:50) 剩餘：**${{ steps.check_qty.outputs.qty2 }}** 張
             第三場 (15:40–16:40) 剩餘：**${{ steps.check_qty.outputs.qty3 }}** 張
-
-            總結：${{ steps.check_qty.outputs.qty_summary }}
-
-            完整原始輸出：$(echo "${{ steps.check_qty.outputs.full_output_b64 }}" | base64 -d 2>/dev/null || echo "無法顯示完整內容")

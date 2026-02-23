@@ -96,17 +96,13 @@ jobs:
             第一場 (13:00–16:00)：**${{ steps.check_qty.outputs.qty3A }}**
             第二場 (16:50–19:50)：**${{ steps.check_qty.outputs.qty3B }}**
             見面會合照券
-            第一場：**${{ steps.check_qty.outputs.qty4A }}**
-            第二場：**${{ steps.check_qty.outputs.qty4B }}**
+            第一場：**${{ steps.check_qty.outputs.qty4A }}** 第二場：**${{ steps.check_qty.outputs.qty4B }}**
             10秒個人攝影券
-            第一場：**${{ steps.check_qty.outputs.qty5A }}**
-            第二場：**${{ steps.check_qty.outputs.qty5B }}**
+            第一場：**${{ steps.check_qty.outputs.qty5A }}** 第二場：**${{ steps.check_qty.outputs.qty5B }}**
             10秒自拍券
-            第一場：**${{ steps.check_qty.outputs.qty6A }}**
-            第二場：**${{ steps.check_qty.outputs.qty6B }}**
+            第一場：**${{ steps.check_qty.outputs.qty6A }}** 第二場：**${{ steps.check_qty.outputs.qty6B }}**
             簽名券
-            第一場：**${{ steps.check_qty.outputs.qty7A }}**
-            第二場：**${{ steps.check_qty.outputs.qty7B }}**
+            第一場：**${{ steps.check_qty.outputs.qty7A }}** 第二場：**${{ steps.check_qty.outputs.qty7B }}**
             15秒Video錄影劵：**${{ steps.check_qty.outputs.qty8 }}**
             唇印簽名劵：**${{ steps.check_qty.outputs.qty9 }}**
             教師挑戰劵：**${{ steps.check_qty.outputs.qty9 }}**

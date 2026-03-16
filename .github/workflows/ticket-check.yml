@@ -62,15 +62,6 @@ jobs:
           qty13B=${qtys[26]:-查詢失敗}
           qty14A=${qtys[27]:-查詢失敗}
           qty14B=${qtys[28]:-查詢失敗}
-          qty15A=${qtys[29]:-查詢失敗}
-          qty15B=${qtys[30]:-查詢失敗}
-          qty16A=${qtys[31]:-查詢失敗}
-          qty16B=${qtys[32]:-查詢失敗}
-          qty17A=${qtys[33]:-查詢失敗}
-          qty17B=${qtys[34]:-查詢失敗}
-          qty18=${qtys[35]:-查詢失敗}
-          qty19=${qtys[36]:-查詢失敗}
-          qty20=${qtys[37]:-查詢失敗}
 
           # Save them as separate outputs
           echo "qty1A=$qty1A" >> "$GITHUB_OUTPUT"
@@ -101,16 +92,6 @@ jobs:
           echo "qty12C=$qty12C" >> "$GITHUB_OUTPUT"
           echo "qty13A=$qty13A" >> "$GITHUB_OUTPUT"
           echo "qty13B=$qty13B" >> "$GITHUB_OUTPUT"
-          echo "qty14A=$qty14A" >> "$GITHUB_OUTPUT"
-          echo "qty14B=$qty14B" >> "$GITHUB_OUTPUT"
-          echo "qty15A=$qty15A" >> "$GITHUB_OUTPUT"
-          echo "qty15B=$qty15B" >> "$GITHUB_OUTPUT"
-          echo "qty16A=$qty16A" >> "$GITHUB_OUTPUT"
-          echo "qty16B=$qty16B" >> "$GITHUB_OUTPUT"
-          echo "qty17A=$qty17A" >> "$GITHUB_OUTPUT"
-          echo "qty17B=$qty17B" >> "$GITHUB_OUTPUT"
-          echo "qty18=$qty18" >> "$GITHUB_OUTPUT"
-          echo "qty19=$qty19" >> "$GITHUB_OUTPUT"
           
       - name: Get current HK time
         id: time
@@ -145,20 +126,10 @@ jobs:
             __唇印簽名劵__：**${{ steps.check_qty.outputs.qty9 }}**
             __教師挑戰劵__：**${{ steps.check_qty.outputs.qty9 }}**
 
-            *藤森里穗庫存報告* (${{ steps.time.outputs.macau_time }})
+            *神木麗庫存報告* (${{ steps.time.outputs.macau_time }})
             __攝影會__
             第一場：**${{ steps.check_qty.outputs.qty11A }}** 加購券：**${{ steps.check_qty.outputs.qty12A }}**
             第二場：**${{ steps.check_qty.outputs.qty11B }}** 加購券：**${{ steps.check_qty.outputs.qty12B }}**
             第三場：**${{ steps.check_qty.outputs.qty11C }}** 加購券：**${{ steps.check_qty.outputs.qty12C }}**
             __見面會入場券__
             第一場：**${{ steps.check_qty.outputs.qty13A }}** 第二場：**${{ steps.check_qty.outputs.qty13B }}**
-            __見面會合照券__
-            第一場：**${{ steps.check_qty.outputs.qty14A }}** 第二場：**${{ steps.check_qty.outputs.qty14B }}**
-            __10秒個人攝影券__
-            第一場：**${{ steps.check_qty.outputs.qty15A }}** 第二場：**${{ steps.check_qty.outputs.qty15B }}**
-            __10秒自拍券__
-            第一場：**${{ steps.check_qty.outputs.qty16A }}** 第二場：**${{ steps.check_qty.outputs.qty16B }}**
-            __簽名券__
-            第一場：**${{ steps.check_qty.outputs.qty17A }}** 第二場：**${{ steps.check_qty.outputs.qty17B }}**
-            __15秒Video錄影劵__：**${{ steps.check_qty.outputs.qty18 }}**
-            __壁咚套餐__：**${{ steps.check_qty.outputs.qty19 }}**
